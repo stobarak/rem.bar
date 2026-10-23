@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>СТО Барак — Зварювальні роботи та обслуговування авто</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #11100f;
+      --black-soft: #191715;
+      --red: #c94b32;
+      --red-dark: #a93b27;
+      --cream: #eee1ca;
+      --cream-soft: #d9ccb6;
+      --border: #e5d8c2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--black);
+      color: var(--cream);
+      font-family: "Barlow Condensed", Arial, sans-serif;
+    }
+
+    .sto-page {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      overflow: hidden;
+      padding: 30px 20px 35px;
+      display: flex;
+      justify-content: center;
+
+      background:
+        radial-gradient(circle at 50% 15%,
+          rgba(201, 75, 50, 0.08),
+          transparent 30%),
+        linear-gradient(135deg,
+          #11100f 0%,
+          #171513 50%,
+          #0e0d0c 100%);
+    }
+
+    /*
+      Decorative diagonal stripes
+    */
+
+
+    .sto-page::before,
+    .sto-page::after {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 18px;
+      background: var(--red);
+      transform: rotate(-45deg);
+      opacity: 0.9;
+    }
+
+    .sto-page::before {
+      top: 28px;
+      left: -95px;
+      box-shadow:
+        28px 28px 0 var(--red),
+        6px 56px 0 var(--red);
+    }
+
+    .sto-page::after {
+      right: -55px;
+      bottom: 35px;
+      box-shadow:
+        28px 28px 0 var(--red),
+        56px 56px 0 var(--red);
+    }
+
+    .sto-container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+    }
+
+    /*
+      LOGO
+    */
+
+    .sto-logo {
+      margin: 5px auto 18px;
+      /*border: 7px solid var(--cream);
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center; */
+    }
+
+    .sto-logo img {
+      width: 130px;
+      height: 130px;
+
+    }
+
+    /*
+      TITLE
+    */
+
+    .sto-title {
+      margin: 0;
+      font-size: clamp(54px, 15vw, 88px);
+      line-height: 0.8;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-top: 150px;
+    }
+
+    .sto-title span {
+      display: block;
+      color: var(--cream);
+      font-size: 0.62em;
+      margin-bottom: 8px;
+    }
+
+    .sto-line {
+      width: 85%;
+      height: 4px;
+      background: var(--red);
+      margin: 20px auto 18px;
+    }
+
+    .sto-subtitle {
+      margin: 0 0 30px;
+      color: var(--cream);
+      font-size: 21px;
+      line-height: 1.15;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /*
+      BUTTONS
+    */
+
+    .sto-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .sto-button {
+      min-height: 76px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+
+      padding: 12px 22px;
+
+      border: 2px solid var(--border);
+      border-radius: 8px;
+
+      color: var(--cream);
+      text-decoration: none;
+
+      background: rgba(20, 18, 16, 0.85);
+
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .sto-button:hover {
+      transform: translateY(-2px);
+      border-color: var(--red);
+      background: rgba(201, 75, 50, 0.12);
+    }
+
+    .sto-button:active {
+      transform: scale(0.98);
+    }
+
+    .sto-button--phone {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--cream);
+    }
+
+    .sto-button--phone:hover {
+      background: var(--red-dark);
+      border-color: var(--red-dark);
+    }
+
+    .sto-icon {
+      width: 42px;
+      min-width: 42px;
+      height: 42px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 30px;
+    }
+
+    .sto-button-text {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .sto-button-title {
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .sto-button-value {
+      margin-top: 5px;
+      font-size: 19px;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    /*
+      LOCATION
+    */
+
+    .sto-location {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+
+      margin-top: 28px;
+
+      color: var(--cream-soft);
+      font-size: 19px;
+      font-weight: 600;
+    }
+
+    .sto-location-icon {
+      color: var(--red);
+      font-size: 27px;
+    }
+
+    /*
+      FOOTER
+    */
+
+    .sto-footer {
+      margin-top: 18px;
+      font-size: 13px;
+      color: rgba(238, 225, 202, 0.45);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /*
+      MOBILE
+    */
+
+    @media (max-width: 480px) {
+
+      .sto-page {
+        padding: 28px 18px 30px;
+      }
+
+      /* 
+      .sto-logo {
+        width: 105px;
+        height: 105px;
+        border-width: 6px;
+      }
+
+      .sto-logo::before {
+        font-size: 48px;
+      } */
+
+      .sto-title {
+        font-size: 64px;
+      }
+
+      .sto-subtitle {
+        font-size: 18px;
+        margin-bottom: 24px;
+      }
+
+      .sto-button {
+        min-height: 70px;
+        padding: 10px 17px;
+        gap: 13px;
+      }
+
+      .sto-icon {
+        width: 38px;
+        min-width: 38px;
+        font-size: 27px;
+      }
+
+      .sto-button-title {
+        font-size: 19px;
+      }
+
+      .sto-button-value {
+        font-size: 17px;
+      }
+
+      .sto-location {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="sto-page">
+
+    <div class="sto-container">
+
+      <!-- LOGO -->
+      <!-- <div class="sto-logo">
+        <img src="./logo_circle.png" alt="logo">
+      </div> -->
+
+      <!-- TITLE -->
+      <h1 class="sto-title">
+        <span>БАРАК</span>
+        Денис
+      </h1>
+
+      <div class="sto-line"></div>
+
+      <p class="sto-subtitle">
+        Зварювальні роботи <br> Обслуговування авто
+      </p>
+
+
+      <!-- BUTTONS -->
+      <div class="sto-buttons">
+
+        <!-- PHONE -->
+        <a class="sto-button sto-button--phone" href="tel:+380637737416">
+          <span class="sto-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone"
+              viewBox="0 0 16 16">
+              <path
+                d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
+            </svg>
+          </span>
+
+          <span class="sto-button-text">
+            <span class="sto-button-title">
+              Зателефонувати
+            </span>
+
+            <span class="sto-button-value">
+              063 77 37 416
+            </span>
+          </span>
+        </a>
+
+
+        <!-- INSTAGRAM -->
+        <a class="sto-button" href="https://www.instagram.com/sto.barak" target="_blank" rel="noopener noreferrer">
+          <span class="sto-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-instagram" viewBox="0 0 16 16">
+              <path
+                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+            </svg></span>
+
+          <span class="sto-button-text">
+            <span class="sto-button-title">
+              Instagram
+            </span>
+
+            <span class="sto-button-value">
+              @sto.barak
+            </span>
+          </span>
+        </a>
+
+
+        <!-- TIKTOK -->
+        <a class="sto-button" href="https://www.tiktok.com/@sto.barak" target="_blank" rel="noopener noreferrer">
+          <span class="sto-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-tiktok" viewBox="0 0 16 16">
+              <path
+                d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z" />
+            </svg></span>
+
+          <span class="sto-button-text">
+            <span class="sto-button-title">
+              TikTok
+            </span>
+
+            <span class="sto-button-value">
+              @sto.barak
+            </span>
+          </span>
+        </a>
+
+        <!-- map -->
+        <a class="sto-button" href="https://maps.app.goo.gl/hbUWnHaWRqRpXDmGA" target="_blank"
+          rel="noopener noreferrer">
+          <span class="sto-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-geo-alt" viewBox="0 0 16 16">
+              <path
+                d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10" />
+              <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+            </svg></span>
+
+          <span class="sto-button-text">
+            <span class="sto-button-title">
+              На карті
+            </span>
+
+            <span class="sto-button-value">
+              м. Бар, вул. Кривоноса
+            </span>
+          </span>
+        </a>
+
+      </div>
+
+
+      <div class="sto-footer">
+        РЕМ.БАР
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
+
+</html>
